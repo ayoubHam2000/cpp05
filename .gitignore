@@ -1,0 +1,6 @@
+**/*.o
+**/*.d
+.vscode/
+_OUT/
+Bureaucrat
+Home_shrubbery
