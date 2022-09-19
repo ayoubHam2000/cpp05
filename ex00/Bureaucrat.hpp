@@ -13,10 +13,10 @@ private:
 	int			_grade;
 
 private:
-	void	checkGrade();
+	void	checkGrade(int newGrade);
 
 public:
-	Bureaucrat(const std::string &name, int grade);
+	Bureaucrat(const std::string &name = "", int grade = 150);
 	Bureaucrat(const Bureaucrat &other);
 	Bureaucrat &operator=(const Bureaucrat &rhs);
 	~Bureaucrat();

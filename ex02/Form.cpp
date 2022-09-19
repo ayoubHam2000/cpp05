@@ -3,7 +3,12 @@
 #include "Bureaucrat.hpp"
 
 Form::Form(const std::string &name, int reqGrade, int execGrade): _name(name), _isSigned(false), _reqGrade(reqGrade), _execGrade(execGrade)
-{}
+{
+	if (_reqGrade < 1 || _execGrade < 1)
+		throw GradeTooHighException();
+	if (_reqGrade > 150 || _execGrade > 150)
+		throw GradeTooLowException();
+}
 
 Form::Form(const Form &other): _name(other._name), _isSigned(other._isSigned), _reqGrade(other._reqGrade), _execGrade(other._execGrade)
 {}
@@ -46,6 +51,8 @@ void	Form::beSigned(const Bureaucrat &b)
 
 void Form::execute(Bureaucrat const & executor) const
 {
+	if (!_isSigned)
+		throw FormNotSigned();
 	if (executor.getGrade() > _execGrade)
 		throw GradeTooLowException();
 	doExecute();
@@ -70,6 +77,16 @@ const char* Form::GradeTooLowException::what() const throw()
 {
 	return "Form: Grade too low exception";
 }
+
+// ========================================================================== //
+// Form is Not Signed
+// ========================================================================== //
+
+const char* Form::FormNotSigned::what() const throw()
+{
+	return "Form is not signed to be executed.";
+}
+
 
 // ========================================================================== //
 // Utils

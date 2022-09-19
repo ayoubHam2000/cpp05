@@ -3,7 +3,12 @@
 #include "Bureaucrat.hpp"
 
 Form::Form(const std::string &name, int reqGrade, int execGrade): _name(name), _isSigned(false), _reqGrade(reqGrade), _execGrade(execGrade)
-{}
+{
+	if (_reqGrade < 1 || _execGrade < 1)
+		throw GradeTooHighException();
+	if (_reqGrade > 150 || _execGrade > 150)
+		throw GradeTooLowException();
+}
 
 Form::Form(const Form &other): _name(other._name), _isSigned(other._isSigned), _reqGrade(other._reqGrade), _execGrade(other._execGrade)
 {}

@@ -3,7 +3,7 @@
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade): _name(name), _grade(grade)
 {
-	checkGrade();
+	checkGrade(grade);
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other): _name(other._name)
@@ -34,14 +34,14 @@ int Bureaucrat::getGrade() const
 
 void Bureaucrat::incrementGrade()
 {
+	checkGrade(_grade - 1);
 	_grade--;
-	checkGrade();
 }
 
 void Bureaucrat::decrementGrade()
 {
+	checkGrade(_grade + 1);
 	_grade++;
-	checkGrade();
 }
 
 void Bureaucrat::signForm(Form &form)
@@ -61,11 +61,11 @@ void Bureaucrat::signForm(Form &form)
 // private
 // ========================================================================== //
 
-void	Bureaucrat::checkGrade()
+void	Bureaucrat::checkGrade(int newGrade)
 {
-	if (_grade < 1)
+	if (newGrade < 1)
 		throw GradeTooHighException();
-	if (_grade > 150)
+	if (newGrade > 150)
 		throw GradeTooLowException();
 }
 

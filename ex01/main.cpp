@@ -3,7 +3,7 @@
 
 void	test1()
 {
-	Form	f("Home", 42, 37);
+	Form	f("Home", 42, 40);
 	Bureaucrat	b1("Bob", 42);
 	Bureaucrat	b2("steeve", 50);
 
@@ -15,6 +15,14 @@ void	test1()
 
 int	main()
 {
-	test1();
+	try
+	{
+		test1();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	
 	return (0);
 }
